@@ -182,8 +182,8 @@ body {
 [data-theme="light"] .divider { display: none; }
 
 .en {
-  font-family: 'EB Garamond', serif;
-  font-size: 22px;
+  font-family: 'Lora', serif;
+  font-size: 21px;
   font-style: italic;
   line-height: 2;
   color: var(--text-sub);
