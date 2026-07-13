@@ -290,19 +290,26 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="footer-nav">
-            <button
-              className={completedToday ? 'nav-btn done' : 'nav-btn'}
-              onClick={handleComplete}
-              disabled={saving}
-              style={{ minWidth: '200px' }}
-            >
-              {saving
-                ? '저장 중...'
-                : completedToday
-                  ? '오늘 읽기 완료됨 ✓'
-                  : '오늘 읽기 완료'}
-            </button>
+          <div className="read-footer">
+            {completedToday ? (
+              <div className="read-done">
+                <button className="complete-btn done" disabled>
+                  오늘 읽기 완료 ✓
+                </button>
+                <p className="encourage">오늘도 말씀과 함께하셨네요.</p>
+              </div>
+            ) : (
+              <>
+                <p className="today-amount">오늘 읽을 분량 · {verses.length}절</p>
+                <button
+                  className="complete-btn"
+                  onClick={handleComplete}
+                  disabled={saving}
+                >
+                  {saving ? '저장 중...' : '오늘 읽기 완료'}
+                </button>
+              </>
+            )}
           </div>
         </>
       )}
