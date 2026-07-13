@@ -486,3 +486,89 @@ body {
   cursor: pointer;
   padding: 4px 6px;
 }
+
+/* ===== 읽기 계획 설정 화면 ===== */
+.plan-wrap {
+  max-width: 480px;
+  margin: 20px auto 0;
+  padding: 0 4px;
+}
+.plan-title {
+  font-family: 'Gowun Dodum', sans-serif;
+  font-size: 26px;
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 8px;
+}
+.plan-sub {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  color: var(--text-sub);
+  text-align: center;
+  margin-bottom: 36px;
+}
+.plan-loading {
+  text-align: center;
+  color: var(--text-sub);
+  padding: 40px 0;
+}
+.plan-form { display: flex; flex-direction: column; gap: 22px; }
+.plan-field { display: flex; flex-direction: column; gap: 8px; }
+.plan-label {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.plan-select, .plan-number {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-main);
+  width: 100%;
+}
+.plan-select:disabled { opacity: 0.5; }
+.plan-perday { display: flex; align-items: center; gap: 10px; }
+.plan-number { width: 100px; text-align: center; }
+.plan-unit {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+  color: var(--text-sub);
+}
+.plan-preview {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-main);
+  background: var(--toggle-bg);
+  border-radius: 10px;
+  padding: 14px 16px;
+  text-align: center;
+  word-break: keep-all;
+}
+.plan-preview b { color: var(--accent); }
+.plan-save-btn {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--bg-solid);
+  background: var(--accent);
+  border: none;
+  border-radius: 12px;
+  padding: 15px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+.plan-save-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.plan-cancel-btn {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  color: var(--text-sub);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}

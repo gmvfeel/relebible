@@ -144,6 +144,9 @@ export default function Home() {
         <div className="topbar-right">
           {user ? (
             <>
+              <button className="theme-toggle" onClick={() => router.push('/plan')}>
+                읽기 계획
+              </button>
               <span className="user-email">{user.email}</span>
               <button className="theme-toggle" onClick={handleLogout}>
                 로그아웃
