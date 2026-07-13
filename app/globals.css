@@ -52,31 +52,39 @@ body {
   padding-top: 12px;
 }
 .logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  color: var(--accent);
-  position: relative;
-  display: inline-block;
-  white-space: nowrap;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
   flex-shrink: 0;
+  cursor: default;
 }
-/* 'Re'의 e 위에 올라가는 해(빛) 점 */
-.logo .sun-e {
+.logo-mark {
   position: relative;
-  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: -1px;
+  color: var(--accent);
+  line-height: 1;
 }
-.logo .sun-e::before {
-  content: "";
+.logo-sun {
   position: absolute;
-  top: -0.28em;
+  top: -5px;
   left: 50%;
   transform: translateX(-50%);
-  width: 0.22em;
-  height: 0.22em;
+  width: 6px;
+  height: 6px;
   background: var(--accent);
   border-radius: 50%;
+}
+.logo-ko {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: var(--text-sub);
+  margin-top: 3px;
 }
 .theme-toggle {
   background: var(--toggle-bg);
@@ -323,26 +331,38 @@ body {
   text-align: center;
 }
 .auth-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 32px;
-  font-weight: 600;
-  color: var(--accent);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
   margin-bottom: 6px;
 }
-.auth-logo .sun-e {
+.auth-logo-mark {
   position: relative;
-  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 48px;
+  letter-spacing: -1.5px;
+  color: var(--accent);
+  line-height: 1;
 }
-.auth-logo .sun-e::before {
-  content: "";
+.auth-logo-sun {
   position: absolute;
-  top: -0.28em;
+  top: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 0.22em;
-  height: 0.22em;
+  width: 9px;
+  height: 9px;
   background: var(--accent);
   border-radius: 50%;
+}
+.auth-logo-ko {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: var(--text-sub);
+  margin-top: 6px;
 }
 .auth-subtitle {
   font-size: 14px;

@@ -202,7 +202,10 @@ export default function Home() {
   return (
     <div className="container">
       <div className="topbar">
-        <span className="logo">R<span className="sun-e">e</span>leBible</span>
+        <span className="logo">
+          <span className="logo-mark">RB<span className="logo-sun"></span></span>
+          <span className="logo-ko">리리바이블</span>
+        </span>
         <div className="topbar-right">
           {user ? (
             <>
