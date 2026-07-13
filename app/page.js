@@ -39,7 +39,7 @@ export default function Home() {
 
   useEffect(() => {
     const kst = new Date(Date.now() + 9 * 60 * 60 * 1000);
-    setTodayDate(`${kst.getUTCMonth() + 1}월 ${kst.getUTCDate()}일`);
+    setTodayDate(`${kst.getUTCFullYear()}년 ${kst.getUTCMonth() + 1}월 ${kst.getUTCDate()}일`);
   }, []);
 
   // 로그인 상태 확인
@@ -201,23 +201,24 @@ export default function Home() {
 
   return (
     <div className="container">
+      {/* 상단 바 */}
       <div className="topbar">
         <span className="logo">
-          <span className="logo-mark">RB<span className="logo-sun"></span></span>
+          <span className="logo-mark">RELEBIBLE</span>
           <span className="logo-ko">리리바이블</span>
         </span>
         <div className="topbar-right">
           {user ? (
             <>
               <button className="top-btn" onClick={() => router.push('/plan')}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                   <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
                 </svg>
                 <span>읽기 계획</span>
               </button>
               <button className="top-btn" onClick={handleLogout}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                   <polyline points="16 17 21 12 16 7" />
                   <line x1="21" y1="12" x2="9" y2="12" />
@@ -227,7 +228,7 @@ export default function Home() {
             </>
           ) : (
             <button className="top-btn" onClick={() => router.push('/login')}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
                 <polyline points="10 17 15 12 10 7" />
                 <line x1="15" y1="12" x2="3" y2="12" />
@@ -237,12 +238,12 @@ export default function Home() {
           )}
           <button className="top-icon-btn" onClick={toggleTheme} aria-label="테마 전환">
             {theme === 'dark' ? (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="4" />
                 <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4" />
               </svg>
             ) : (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
             )}
@@ -250,148 +251,99 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="date-header">
-        <div className="date-line">
-          <span className="date">{todayDate}</span>
-          {user && (
-            <>
-              <span className="date-sep">·</span>
-              <span className="day-count">
-                성경읽기 <span className="day-num">{totalDays}</span>일째
-              </span>
-            </>
-          )}
-          {!user && (
-            <span className="day-count-guide">로그인하면 진도가 기록돼요</span>
-          )}
-        </div>
+      {/* 진도 메타 */}
+      <div className="meta">
+        <div className="meta-date">{todayDate}</div>
+        {user ? (
+          <div className="meta-streak">
+            성경읽기 <b>{totalDays}</b><span>일째</span>
+          </div>
+        ) : (
+          <div className="meta-guide">로그인하면 나만의 읽기를 시작할 수 있어요</div>
+        )}
       </div>
 
-      {/* 상태에 따라 다르게 표시 */}
+      {/* 상태별 화면 */}
       {loading ? (
-        <div className="ref">불러오는 중...</div>
+        <div className="empty-state"><p className="empty-text">불러오는 중...</p></div>
       ) : !user ? (
         <div className="empty-state">
           <p className="empty-text">로그인하면 나만의 성경 읽기를 시작할 수 있어요.</p>
-          <button className="empty-btn" onClick={() => router.push('/login')}>
-            로그인 / 회원가입
-          </button>
+          <button className="empty-btn" onClick={() => router.push('/login')}>로그인 / 회원가입</button>
         </div>
       ) : !plan ? (
         <div className="empty-state">
-          <p className="empty-text">
-            아직 읽기 계획이 없어요.<br />
-            어떤 말씀을, 하루에 얼마씩 읽을지 정해보세요.
-          </p>
-          <button className="empty-btn" onClick={() => router.push('/plan')}>
-            읽기 계획 정하기
-          </button>
+          <p className="empty-text">{'아직 읽기 계획이 없어요.\n어떤 말씀을, 하루에 얼마씩 읽을지 정해보세요.'}</p>
+          <button className="empty-btn" onClick={() => router.push('/plan')}>읽기 계획 정하기</button>
         </div>
       ) : verses.length === 0 ? (
         <div className="empty-state">
           <p className="empty-text">
-            계획하신 분량을 모두 읽으셨어요! 🎉<br />
-            새로운 구간을 정해 계속 읽어보세요.
+            {viewOffset > 0
+              ? '이 날의 분량이 아직 없어요.\n계획한 구간을 다 읽으면 새 계획을 정할 수 있어요.'
+              : '계획하신 분량을 모두 읽으셨어요! 🎉\n새로운 구간을 정해 계속 읽어보세요.'}
           </p>
-          <button className="empty-btn" onClick={() => router.push('/plan')}>
-            새 계획 정하기
-          </button>
+          {viewOffset !== 0 ? (
+            <button className="empty-btn" onClick={() => setViewOffset(0)}>오늘로 돌아가기</button>
+          ) : (
+            <button className="empty-btn" onClick={() => router.push('/plan')}>새 계획 정하기</button>
+          )}
         </div>
       ) : (
         <>
-          {verses.length === 0 ? (
-            <div className="empty-state">
-              <p className="empty-text">
-                {viewOffset > 0
-                  ? '이 날의 분량이 아직 없어요.\n계획한 구간을 다 읽으면 새 계획을 정할 수 있어요.'
-                  : '이 날의 분량이 없어요.'}
-              </p>
-              {viewOffset !== 0 && (
-                <button className="empty-btn" onClick={() => setViewOffset(0)}>
-                  오늘로 돌아가기
-                </button>
-              )}
+          <div className="ref">{refLabel}</div>
+
+          <div className="reading">
+            <div className="verse-cols">
+              <div className="verse-col">
+                <div className="verse-col-tag">개역한글</div>
+                <div className="passage-ko">
+                  {verses.map((v) => (
+                    <span key={`ko-${v.book_order}-${v.chapter}-${v.verse}`} className="v">
+                      <span className="vn">{v.verse}</span>{v.text_ko}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="verse-col">
+                <div className="verse-col-tag">KJV</div>
+                <div className="passage-en">
+                  {verses.map((v) => (
+                    <span key={`en-${v.book_order}-${v.chapter}-${v.verse}`} className="v">
+                      <span className="vn">{v.verse}</span>{v.text_en}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
-          ) : (
-            <>
-              <div className="ref">{refLabel}</div>
+          </div>
 
-              <div className="verse-grid">
-                <div className="verse-col">
-                  <div className="verse-tag">개역한글</div>
-                  <div className="passage-ko">
-                    {verses.map((v) => (
-                      <div key={`ko-${v.book_order}-${v.chapter}-${v.verse}`} className="verse-line-ko">
-                        <span className="vnum">{v.verse}</span>
-                        {v.text_ko}
-                      </div>
-                    ))}
-                  </div>
+          {/* 하단 */}
+          <div className="footer">
+            {viewOffset === 0 ? (
+              completedToday ? (
+                <div className="read-done">
+                  <button className="cta done" disabled>오늘 읽기 완료 ✓</button>
+                  <p className="encourage">오늘도 말씀과 함께하셨네요.</p>
                 </div>
-                <div className="divider"></div>
-                <div className="verse-col">
-                  <div className="verse-tag">KJV</div>
-                  <div className="passage-en">
-                    {verses.map((v) => (
-                      <div key={`en-${v.book_order}-${v.chapter}-${v.verse}`} className="verse-line-en">
-                        <span className="vnum">{v.verse}</span>
-                        {v.text_en}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              ) : (
+                <>
+                  <p className="today-amount">오늘 읽을 분량 · {verses.length}절</p>
+                  <button className="cta" onClick={handleComplete} disabled={saving}>
+                    {saving ? '저장 중...' : '오늘 읽기 완료'}
+                  </button>
+                </>
+              )
+            ) : (
+              <button className="cta done" onClick={() => setViewOffset(0)}>오늘로 돌아가기</button>
+            )}
 
-              {/* 하단: 완료(오늘일 때) + 날짜 네비게이션 */}
-              <div className="read-footer">
-                {viewOffset === 0 ? (
-                  completedToday ? (
-                    <div className="read-done">
-                      <button className="complete-btn done" disabled>
-                        오늘 읽기 완료 ✓
-                      </button>
-                      <p className="encourage">오늘도 말씀과 함께하셨네요.</p>
-                    </div>
-                  ) : (
-                    <>
-                      <p className="today-amount">오늘 읽을 분량 · {verses.length}절</p>
-                      <button
-                        className="complete-btn"
-                        onClick={handleComplete}
-                        disabled={saving}
-                      >
-                        {saving ? '저장 중...' : '오늘 읽기 완료'}
-                      </button>
-                    </>
-                  )
-                ) : (
-                  <button className="complete-btn done" onClick={() => setViewOffset(0)}>
-                    오늘로 돌아가기
-                  </button>
-                )}
-
-                {/* 날짜 넘김 네비게이션 */}
-                <div className="day-nav">
-                  <button
-                    className="day-nav-btn"
-                    onClick={() => setViewOffset(viewOffset - 1)}
-                    disabled={dayNumber <= 1}
-                  >
-                    ← 어제
-                  </button>
-                  <span className="day-nav-label">
-                    {viewOffset === 0 ? '오늘' : `${dayNumber}일째`}
-                  </span>
-                  <button
-                    className="day-nav-btn"
-                    onClick={() => setViewOffset(viewOffset + 1)}
-                  >
-                    내일 →
-                  </button>
-                </div>
-              </div>
-            </>
-          )}
+            <div className="day-nav">
+              <button className="day-nav-btn" onClick={() => setViewOffset(viewOffset - 1)} disabled={dayNumber <= 1}>← 어제</button>
+              <span className="day-nav-label">{viewOffset === 0 ? '오늘' : `${dayNumber}일째`}</span>
+              <button className="day-nav-btn" onClick={() => setViewOffset(viewOffset + 1)}>내일 →</button>
+            </div>
+          </div>
         </>
       )}
 

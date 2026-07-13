@@ -22,7 +22,12 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@400;600;900&family=Noto+Sans+KR:wght@400;500;700&family=Lora:ital@0;1&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500;600&display=swap"
+          rel="stylesheet"
+          as="style"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Lora:ital@0;1&family=Bebas+Neue&display=swap"
           rel="stylesheet"
         />
         <link rel="apple-touch-icon" href="/icon-192.png" />
