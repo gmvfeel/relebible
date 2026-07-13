@@ -255,3 +255,128 @@ body {
   .kr { font-size: 26px; }
   [data-theme="light"] .kr { font-size: 24px; }
 }
+
+/* ===== 로그인/회원가입 화면 ===== */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.auth-box {
+  width: 100%;
+  max-width: 400px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 40px 32px;
+  text-align: center;
+}
+.auth-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.auth-subtitle {
+  font-size: 14px;
+  color: var(--text-sub);
+  margin-bottom: 32px;
+}
+.auth-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.auth-tab {
+  flex: 1;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  color: var(--text-sub);
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+  transition: all var(--transition);
+}
+.auth-tab.active {
+  background: var(--accent);
+  color: var(--bg-solid);
+  border-color: var(--accent);
+  font-weight: 700;
+}
+.auth-field {
+  text-align: left;
+  margin-bottom: 18px;
+}
+.auth-field label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-bottom: 8px;
+}
+.auth-field input {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--bg-solid);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  color: var(--text-main);
+  font-size: 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.auth-field input:focus {
+  outline: 2px solid var(--accent);
+  border-color: var(--accent);
+}
+.auth-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--accent);
+  color: var(--bg-solid);
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  margin-top: 8px;
+  transition: opacity var(--transition);
+}
+.auth-submit:hover { opacity: 0.85; }
+.auth-submit:disabled { opacity: 0.5; cursor: default; }
+.auth-message {
+  margin-top: 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-main);
+  word-break: keep-all;
+}
+.auth-back {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--text-sub);
+  text-decoration: none;
+}
+.auth-back:hover { color: var(--text-main); }
+
+/* ===== 상단바 오른쪽 (로그인 상태) ===== */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.user-email {
+  font-size: 13px;
+  color: var(--text-sub);
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
