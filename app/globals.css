@@ -123,7 +123,7 @@ body {
 
 /* ===== 본문 영역 ===== */
 .ref {
-  font-family: 'Nanum Myeongjo', serif;
+  font-family: 'Gowun Dodum', sans-serif;
   font-size: 26px;
   color: var(--accent);
   font-weight: 700;
@@ -157,7 +157,7 @@ body {
 [data-theme="light"] .verse-tag { display: block; }
 
 .kr {
-  font-family: 'Nanum Myeongjo', serif;
+  font-family: 'Gowun Dodum', sans-serif;
   font-size: 30px;
   line-height: 2.1;
   text-align: center;
