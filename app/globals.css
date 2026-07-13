@@ -594,3 +594,68 @@ body {
   cursor: pointer;
   padding: 4px;
 }
+
+/* ===== 여러 절 본문 (읽기 계획 기반) ===== */
+.passage-ko {
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.95;
+  letter-spacing: -0.03em;
+  text-align: left;
+  max-width: 640px;
+  margin: 0 auto 32px;
+  word-break: keep-all;
+}
+.passage-en {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.85;
+  color: var(--text-sub);
+  text-align: left;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.verse-line-ko, .verse-line-en { display: inline; }
+.vnum {
+  display: inline-block;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.5em;
+  font-weight: 700;
+  color: var(--accent);
+  vertical-align: super;
+  margin-right: 3px;
+  letter-spacing: 0;
+}
+.passage-en .vnum { font-family: 'Inter', sans-serif; }
+
+@media (max-width: 560px) {
+  .passage-ko { font-size: 24px; line-height: 1.8; }
+  .passage-en { font-size: 17px; line-height: 1.7; }
+}
+
+/* ===== 빈 상태 (계획 없음 등) 안내 ===== */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px 20px;
+}
+.empty-text {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-sub);
+  margin-bottom: 24px;
+  word-break: keep-all;
+}
+.empty-btn {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--bg-solid);
+  background: var(--accent);
+  border: none;
+  border-radius: 12px;
+  padding: 13px 26px;
+  cursor: pointer;
+}
