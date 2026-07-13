@@ -139,7 +139,11 @@ export default function Home() {
           <div className="date">{todayDate}</div>
         </div>
         <div className="day-count">
-          {user ? `— 통독 ${totalDays}일째 —` : '— 로그인하면 진도가 기록돼요 —'}
+          {user ? (
+            <>통독 <span className="day-num">{totalDays}</span>일째</>
+          ) : (
+            '로그인하면 진도가 기록돼요'
+          )}
         </div>
       </div>
 
