@@ -51,7 +51,10 @@ export default function LoginPage() {
   return (
     <div className="auth-container">
       <div className="auth-box">
-        <h1 className="auth-logo">R<span className="sun-e">e</span>leBible</h1>
+        <h1 className="auth-logo">
+          <span className="auth-logo-mark">RB<span className="auth-logo-sun"></span></span>
+          <span className="auth-logo-ko">리리바이블</span>
+        </h1>
         <p className="auth-subtitle">매일 조금씩, 다시 읽는 성경</p>
 
         <div className="auth-tabs">
