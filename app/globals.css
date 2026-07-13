@@ -115,7 +115,7 @@ body {
 }
 .date {
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 14px;
+  font-size: 17px;
   letter-spacing: 1px;
   color: var(--text-sub);
 }
@@ -130,7 +130,7 @@ body {
 }
 .day-count {
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 500;
   color: var(--text-sub);
   letter-spacing: 0;
@@ -756,4 +756,62 @@ body {
   color: var(--text-faint);
   min-width: 56px;
   text-align: center;
+}
+
+/* ===== 상단 고정 헤더 ===== */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg-solid);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+/* 다크모드는 그라데이션 배경이라 solid로 살짝 덮어줌 */
+[data-theme="dark"] .sticky-header {
+  background: #1a2332;
+}
+
+/* ===== 상단 버튼 (아이콘+텍스트, 얇은 테두리) ===== */
+.top-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  color: var(--text-sub);
+  background: transparent;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.top-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.top-btn svg { flex-shrink: 0; }
+.top-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  color: var(--text-sub);
+  background: transparent;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.top-icon-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (max-width: 560px) {
+  .top-btn { font-size: 12px; padding: 6px 10px; }
+  .top-btn svg { width: 13px; height: 13px; }
+  .top-icon-btn { width: 30px; height: 30px; }
 }

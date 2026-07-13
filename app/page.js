@@ -201,26 +201,49 @@ export default function Home() {
 
   return (
     <div className="container">
+      <div className="sticky-header">
       <div className="topbar">
         <span className="logo">R<span className="sun-e">e</span>leBible</span>
         <div className="topbar-right">
           {user ? (
             <>
-              <button className="theme-toggle" onClick={() => router.push('/plan')}>
-                읽기 계획
+              <button className="top-btn" onClick={() => router.push('/plan')}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                </svg>
+                <span>읽기 계획</span>
               </button>
-              <button className="theme-toggle" onClick={handleLogout}>
-                로그아웃
+              <button className="top-btn" onClick={handleLogout}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                <span>로그아웃</span>
               </button>
             </>
           ) : (
-            <button className="theme-toggle" onClick={() => router.push('/login')}>
-              로그인
+            <button className="top-btn" onClick={() => router.push('/login')}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                <polyline points="10 17 15 12 10 7" />
+                <line x1="15" y1="12" x2="3" y2="12" />
+              </svg>
+              <span>로그인</span>
             </button>
           )}
-          <button className="theme-toggle" onClick={toggleTheme}>
-            <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
-            <span>{theme === 'dark' ? '라이트' : '다크'}</span>
+          <button className="top-icon-btn" onClick={toggleTheme} aria-label="테마 전환">
+            {theme === 'dark' ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4" />
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            )}
           </button>
         </div>
       </div>
@@ -241,6 +264,8 @@ export default function Home() {
           )}
         </div>
       </div>
+      </div>
+      {/* ↑ 여기까지 상단 고정 영역 */}
 
       {/* 상태에 따라 다르게 표시 */}
       {loading ? (
