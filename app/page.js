@@ -12,10 +12,13 @@ export default function Home() {
   const [totalDays, setTotalDays] = useState(0);
   const [saving, setSaving] = useState(false);
 
+  // 오늘 읽을 본문 (수파베이스에서 불러옴)
+  const [verse, setVerse] = useState(null);
+  const [loadingVerse, setLoadingVerse] = useState(true);
+
   const router = useRouter();
   const supabase = createClient();
 
-  // 오늘 날짜를 YYYY-MM-DD 형태로 (저장용)
   const getTodayString = () => {
     const now = new Date();
     const y = now.getFullYear();
@@ -33,6 +36,27 @@ export default function Home() {
     const now = new Date();
     setTodayDate(months[now.getMonth()] + ' ' + now.getDate());
   }, []);
+
+  // 오늘의 본문 불러오기 (지금은 창세기 1장 1절로 연결 확인)
+  useEffect(() => {
+    loadVerse();
+  }, []);
+
+  const loadVerse = async () => {
+    setLoadingVerse(true);
+    const { data, error } = await supabase
+      .from('rb_bible_verses')
+      .select('book_ko, book_en, chapter, verse, text_ko, text_en')
+      .eq('book_order', 1)   // 창세기
+      .eq('chapter', 1)      // 1장
+      .eq('verse', 1)        // 1절
+      .single();
+
+    if (!error && data) {
+      setVerse(data);
+    }
+    setLoadingVerse(false);
+  };
 
   // 로그인 상태 확인
   useEffect(() => {
@@ -56,14 +80,12 @@ export default function Home() {
   }, [user]);
 
   const loadProgress = async () => {
-    // 지금까지 읽은 총 일수
     const { count } = await supabase
       .from('rb_reading_progress')
       .select('*', { count: 'exact', head: true })
       .eq('user_id', user.id);
     setTotalDays(count ?? 0);
 
-    // 오늘 읽었는지 확인
     const { data } = await supabase
       .from('rb_reading_progress')
       .select('id')
@@ -81,23 +103,21 @@ export default function Home() {
     setUser(null);
   };
 
-  // 오늘 읽기 완료 버튼
   const handleComplete = async () => {
-    // 로그인 안 했으면 로그인 화면으로
     if (!user) {
       router.push('/login');
       return;
     }
-    // 이미 완료했으면 아무것도 안 함
     if (completedToday) return;
 
     setSaving(true);
+    const refText = verse ? `${verse.book_ko} ${verse.chapter}:${verse.verse}` : '';
     const { error } = await supabase
       .from('rb_reading_progress')
       .insert({
         user_id: user.id,
         read_date: getTodayString(),
-        reference: '요한복음 3:16',
+        reference: refText,
         completed: true,
       });
     setSaving(false);
@@ -109,6 +129,9 @@ export default function Home() {
       alert('저장 중 문제가 생겼어요. 잠시 후 다시 시도해 주세요.');
     }
   };
+
+  // 본문 참조 표시 (예: 창세기 1:1)
+  const refLabel = verse ? `${verse.book_ko} ${verse.chapter}:${verse.verse}` : '';
 
   return (
     <div className="container">
@@ -147,28 +170,32 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="ref">요한복음 3:16</div>
+      {loadingVerse ? (
+        <div className="ref">본문을 불러오는 중...</div>
+      ) : verse ? (
+        <>
+          <div className="ref">{refLabel}</div>
 
-      <div className="verse-grid">
-        <div className="verse-col">
-          <div className="verse-tag">개역한글</div>
-          <div className="kr">
-            하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니 이는 저를 믿는 자마다 멸망치 않고 영생을 얻게 하려 하심이니라
+          <div className="verse-grid">
+            <div className="verse-col">
+              <div className="verse-tag">개역한글</div>
+              <div className="kr">{verse.text_ko}</div>
+            </div>
+            <div className="divider"></div>
+            <div className="verse-col">
+              <div className="verse-tag">KJV</div>
+              <div className="en">{verse.text_en}</div>
+            </div>
           </div>
-        </div>
-        <div className="divider"></div>
-        <div className="verse-col">
-          <div className="verse-tag">KJV</div>
-          <div className="en">
-            For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.
-          </div>
-        </div>
-      </div>
+        </>
+      ) : (
+        <div className="ref">본문을 불러오지 못했어요</div>
+      )}
 
       <div className="interp-box">
         <div className="interp-title">오늘의 쉬운 풀이</div>
         <div className="interp-body">
-          하나님이 우리를 얼마나 사랑하시는지를 보여주는 구절이에요. 그 사랑이 말로 그친 게 아니라, 가장 귀한 것(아들)을 내어주실 만큼 컸다는 뜻이에요.
+          (쉬운 풀이는 다음 단계에서 추가할 예정이에요.)
         </div>
       </div>
 
