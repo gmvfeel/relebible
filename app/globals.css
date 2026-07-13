@@ -25,11 +25,11 @@
   --text-main: #1a1a2e;
   --text-sub: #55556a;
   --text-faint: #9999aa;
-  --accent: #5b5bd6;
-  --card-bg: linear-gradient(135deg, #f5f5ff 0%, #eef0ff 100%);
-  --card-border: #eef0ff;
-  --divider: #f0f0f5;
-  --toggle-bg: #f0f0fa;
+  --accent: #1a2332;
+  --card-bg: linear-gradient(135deg, #f6f7f9 0%, #eef1f5 100%);
+  --card-border: #e8ecf2;
+  --divider: #eef0f3;
+  --toggle-bg: #eef1f5;
 }
 
 body {
@@ -277,10 +277,10 @@ body {
 
 @media (max-width: 560px) {
   [data-theme="light"] .verse-grid { grid-template-columns: 1fr; gap: 24px; }
-  .kr { font-size: 26px; line-height: 1.7; }
-  [data-theme="light"] .kr { font-size: 24px; line-height: 1.7; }
-  .en { font-size: 19px; line-height: 1.7; }
-  [data-theme="light"] .en { font-size: 18px; line-height: 1.6; }
+  .kr { font-size: 26px; line-height: 1.5; }
+  [data-theme="light"] .kr { font-size: 24px; line-height: 1.5; }
+  .en { font-size: 19px; line-height: 1.5; }
+  [data-theme="light"] .en { font-size: 18px; line-height: 1.45; }
 }
 
 /* ===== 로그인/회원가입 화면 ===== */
