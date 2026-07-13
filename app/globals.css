@@ -617,7 +617,8 @@ body {
   max-width: 640px;
   margin: 0 auto;
 }
-.verse-line-ko, .verse-line-en { display: inline; }
+.verse-line-ko, .verse-line-en { display: block; margin-bottom: 14px; }
+.verse-line-ko:last-child, .verse-line-en:last-child { margin-bottom: 0; }
 .vnum {
   display: inline-block;
   font-family: 'Noto Sans KR', sans-serif;

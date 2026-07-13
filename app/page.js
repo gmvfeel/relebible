@@ -269,10 +269,10 @@ export default function Home() {
               <div className="verse-tag">개역한글</div>
               <div className="passage-ko">
                 {verses.map((v) => (
-                  <span key={`ko-${v.book_order}-${v.chapter}-${v.verse}`} className="verse-line-ko">
+                  <div key={`ko-${v.book_order}-${v.chapter}-${v.verse}`} className="verse-line-ko">
                     <span className="vnum">{v.verse}</span>
-                    {v.text_ko}{' '}
-                  </span>
+                    {v.text_ko}
+                  </div>
                 ))}
               </div>
             </div>
@@ -281,10 +281,10 @@ export default function Home() {
               <div className="verse-tag">KJV</div>
               <div className="passage-en">
                 {verses.map((v) => (
-                  <span key={`en-${v.book_order}-${v.chapter}-${v.verse}`} className="verse-line-en">
+                  <div key={`en-${v.book_order}-${v.chapter}-${v.verse}`} className="verse-line-en">
                     <span className="vnum">{v.verse}</span>
-                    {v.text_en}{' '}
-                  </span>
+                    {v.text_en}
+                  </div>
                 ))}
               </div>
             </div>
