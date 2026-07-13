@@ -57,6 +57,24 @@ body {
   font-weight: 600;
   letter-spacing: 1px;
   color: var(--accent);
+  position: relative;
+  display: inline-block;
+}
+/* 'Re'의 e 위에 올라가는 해(빛) 점 */
+.logo .sun-e {
+  position: relative;
+  display: inline-block;
+}
+.logo .sun-e::before {
+  content: "";
+  position: absolute;
+  top: -0.28em;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.22em;
+  height: 0.22em;
+  background: var(--accent);
+  border-radius: 50%;
 }
 .theme-toggle {
   background: var(--toggle-bg);
@@ -286,6 +304,21 @@ body {
   font-weight: 600;
   color: var(--accent);
   margin-bottom: 6px;
+}
+.auth-logo .sun-e {
+  position: relative;
+  display: inline-block;
+}
+.auth-logo .sun-e::before {
+  content: "";
+  position: absolute;
+  top: -0.28em;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.22em;
+  height: 0.22em;
+  background: var(--accent);
+  border-radius: 50%;
 }
 .auth-subtitle {
   font-size: 14px;

@@ -136,7 +136,7 @@ export default function Home() {
   return (
     <div className="container">
       <div className="topbar">
-        <span className="logo">relebible</span>
+        <span className="logo">R<span className="sun-e">e</span>leBible</span>
         <div className="topbar-right">
           {user ? (
             <>
