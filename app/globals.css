@@ -117,7 +117,7 @@ body {
 /* ===== 본문 영역 ===== */
 .ref {
   font-family: 'Nanum Myeongjo', serif;
-  font-size: 22px;
+  font-size: 26px;
   color: var(--accent);
   font-weight: 700;
   text-align: center;
@@ -125,7 +125,7 @@ body {
 }
 [data-theme="light"] .ref {
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 1px;
   text-align: left;
   margin-bottom: 20px;
@@ -151,17 +151,17 @@ body {
 
 .kr {
   font-family: 'Nanum Myeongjo', serif;
-  font-size: 24px;
-  line-height: 2;
+  font-size: 30px;
+  line-height: 2.1;
   text-align: center;
   max-width: 620px;
-  margin: 0 auto 28px;
+  margin: 0 auto 32px;
   word-break: keep-all;
 }
 [data-theme="light"] .kr {
   font-family: 'Noto Serif KR', serif;
-  font-size: 20px;
-  line-height: 1.9;
+  font-size: 26px;
+  line-height: 2;
   font-weight: 600;
   text-align: left;
   margin: 0;
@@ -176,9 +176,9 @@ body {
 
 .en {
   font-family: 'EB Garamond', serif;
-  font-size: 18px;
+  font-size: 22px;
   font-style: italic;
-  line-height: 1.9;
+  line-height: 2;
   color: var(--text-sub);
   text-align: center;
   max-width: 560px;
@@ -186,9 +186,9 @@ body {
 }
 [data-theme="light"] .en {
   font-family: 'Inter', sans-serif;
-  font-size: 17px;
+  font-size: 20px;
   font-style: normal;
-  line-height: 1.8;
+  line-height: 1.9;
   text-align: left;
 }
 
@@ -208,15 +208,15 @@ body {
   margin-top: 40px;
 }
 .interp-title {
-  font-size: 13px;
+  font-size: 15px;
   letter-spacing: 1px;
   color: var(--accent);
   margin-bottom: 12px;
   font-weight: 700;
 }
 .interp-body {
-  font-size: 16px;
-  line-height: 1.9;
+  font-size: 19px;
+  line-height: 2;
   color: var(--text-main);
   word-break: keep-all;
 }
@@ -235,11 +235,11 @@ body {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   color: var(--text-sub);
-  padding: 14px;
+  padding: 16px;
   border-radius: 10px;
   cursor: pointer;
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   transition: all var(--transition);
 }
 .nav-btn:hover { color: var(--text-main); }
@@ -252,5 +252,6 @@ body {
 
 @media (max-width: 560px) {
   [data-theme="light"] .verse-grid { grid-template-columns: 1fr; gap: 24px; }
-  .kr { font-size: 21px; }
+  .kr { font-size: 26px; }
+  [data-theme="light"] .kr { font-size: 24px; }
 }
