@@ -274,26 +274,6 @@ export default function Home() {
         </div>
       ) : (
         <>
-          {/* 날짜 넘김 네비게이션 */}
-          <div className="day-nav">
-            <button
-              className="day-nav-btn"
-              onClick={() => setViewOffset(viewOffset - 1)}
-              disabled={dayNumber <= 1}
-            >
-              ← 어제
-            </button>
-            <span className="day-nav-label">
-              {viewOffset === 0 ? '오늘' : `${dayNumber}일째`}
-            </span>
-            <button
-              className="day-nav-btn"
-              onClick={() => setViewOffset(viewOffset + 1)}
-            >
-              내일 →
-            </button>
-          </div>
-
           {verses.length === 0 ? (
             <div className="empty-state">
               <p className="empty-text">
@@ -337,10 +317,10 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 완료 영역은 '오늘'을 볼 때만 */}
-              {viewOffset === 0 ? (
-                <div className="read-footer">
-                  {completedToday ? (
+              {/* 하단: 완료(오늘일 때) + 날짜 네비게이션 */}
+              <div className="read-footer">
+                {viewOffset === 0 ? (
+                  completedToday ? (
                     <div className="read-done">
                       <button className="complete-btn done" disabled>
                         오늘 읽기 완료 ✓
@@ -358,15 +338,33 @@ export default function Home() {
                         {saving ? '저장 중...' : '오늘 읽기 완료'}
                       </button>
                     </>
-                  )}
-                </div>
-              ) : (
-                <div className="read-footer">
+                  )
+                ) : (
                   <button className="complete-btn done" onClick={() => setViewOffset(0)}>
                     오늘로 돌아가기
                   </button>
+                )}
+
+                {/* 날짜 넘김 네비게이션 */}
+                <div className="day-nav">
+                  <button
+                    className="day-nav-btn"
+                    onClick={() => setViewOffset(viewOffset - 1)}
+                    disabled={dayNumber <= 1}
+                  >
+                    ← 어제
+                  </button>
+                  <span className="day-nav-label">
+                    {viewOffset === 0 ? '오늘' : `${dayNumber}일째`}
+                  </span>
+                  <button
+                    className="day-nav-btn"
+                    onClick={() => setViewOffset(viewOffset + 1)}
+                  >
+                    내일 →
+                  </button>
                 </div>
-              )}
+              </div>
             </>
           )}
         </>

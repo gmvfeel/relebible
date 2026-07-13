@@ -728,7 +728,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 28px;
+  margin-top: 8px;
 }
 .day-nav-btn {
   font-family: 'Noto Sans KR', sans-serif;
