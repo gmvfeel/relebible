@@ -711,3 +711,39 @@ body {
   color: var(--text-sub);
   letter-spacing: 0.3px;
 }
+
+/* ===== 날짜 넘김 네비게이션 (어제/내일) ===== */
+.day-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.day-nav-btn {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  color: var(--text-sub);
+  background: transparent;
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.day-nav-btn:hover:not(:disabled) {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.day-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.day-nav-label {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-faint);
+  min-width: 56px;
+  text-align: center;
+}

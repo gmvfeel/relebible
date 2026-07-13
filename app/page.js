@@ -14,10 +14,11 @@ export default function Home() {
   const [totalDays, setTotalDays] = useState(0);
   const [saving, setSaving] = useState(false);
 
-  // 읽기 계획 & 오늘 분량
+  // 읽기 계획 & 분량
   const [plan, setPlan] = useState(null);          // 활성 계획
-  const [verses, setVerses] = useState([]);        // 오늘 읽을 절들 (배열)
-  const [dayNumber, setDayNumber] = useState(0);   // 오늘이 며칠째인지
+  const [verses, setVerses] = useState([]);        // 보고 있는 날의 절들
+  const [dayNumber, setDayNumber] = useState(0);   // 보고 있는 날이 며칠째인지
+  const [viewOffset, setViewOffset] = useState(0); // 오늘=0, 어제=-1, 내일=+1
   const [loading, setLoading] = useState(true);
 
   const router = useRouter();
@@ -100,26 +101,33 @@ export default function Home() {
     setPlan(activePlan);
 
     if (activePlan) {
-      await loadTodayVerses(activePlan);
+      await loadTodayVerses(activePlan, viewOffset);
     }
     setLoading(false);
   };
 
-  // 계획을 바탕으로 오늘 읽을 절들 계산해서 가져오기
-  const loadTodayVerses = async (activePlan) => {
-    const perDay = activePlan.verses_per_day;
-    const passedDays = Math.max(0, daysBetween(activePlan.start_date, getTodayString()));
-    setDayNumber(passedDays + 1); // 1일째부터
+  // 어제/내일 버튼으로 오프셋이 바뀌면 본문 다시 불러오기
+  useEffect(() => {
+    if (plan) {
+      loadTodayVerses(plan, viewOffset);
+    }
+  }, [viewOffset]);
 
-    // 시작 절의 전체 순번(절대 위치)을 구하기 위해,
-    // 성경을 book_order, chapter, verse 순으로 정렬했을 때
-    // 시작 지점부터 (지나간 일수 * perDay) 만큼 건너뛴 뒤 perDay개를 가져온다.
-    // 먼저 시작 지점 이상의 절들을 순서대로 가져오되, 건너뛸 개수 + perDay 만큼만.
+  // 계획을 바탕으로 (보고 있는 날의) 읽을 절들 계산해서 가져오기
+  const loadTodayVerses = async (activePlan, offset = 0) => {
+    const perDay = activePlan.verses_per_day;
+    const passedToday = Math.max(0, daysBetween(activePlan.start_date, getTodayString()));
+    const passedDays = passedToday + offset; // 보고 있는 날 기준
+    setDayNumber(passedDays + 1);
+
+    // 시작일보다 이전이면 빈 결과
+    if (passedDays < 0) {
+      setVerses([]);
+      return;
+    }
+
     const skip = passedDays * perDay;
 
-    // 시작 책의 시작 지점부터 순서대로: 복잡한 범위 쿼리 대신
-    // book_order >= 시작책 조건으로 넉넉히 가져와서 앱에서 잘라 쓴다.
-    // (효율을 위해 시작책~끝까지 중 필요한 만큼만 페이지네이션)
     const { data, error } = await supabase
       .from('rb_bible_verses')
       .select('book_order, book_ko, book_en, chapter, verse, text_ko, text_en')
@@ -262,55 +270,101 @@ export default function Home() {
         </div>
       ) : (
         <>
-          <div className="ref">{refLabel}</div>
-
-          <div className="verse-grid">
-            <div className="verse-col">
-              <div className="verse-tag">개역한글</div>
-              <div className="passage-ko">
-                {verses.map((v) => (
-                  <div key={`ko-${v.book_order}-${v.chapter}-${v.verse}`} className="verse-line-ko">
-                    <span className="vnum">{v.verse}</span>
-                    {v.text_ko}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="divider"></div>
-            <div className="verse-col">
-              <div className="verse-tag">KJV</div>
-              <div className="passage-en">
-                {verses.map((v) => (
-                  <div key={`en-${v.book_order}-${v.chapter}-${v.verse}`} className="verse-line-en">
-                    <span className="vnum">{v.verse}</span>
-                    {v.text_en}
-                  </div>
-                ))}
-              </div>
-            </div>
+          {/* 날짜 넘김 네비게이션 */}
+          <div className="day-nav">
+            <button
+              className="day-nav-btn"
+              onClick={() => setViewOffset(viewOffset - 1)}
+              disabled={dayNumber <= 1}
+            >
+              ← 어제
+            </button>
+            <span className="day-nav-label">
+              {viewOffset === 0 ? '오늘' : `${dayNumber}일째`}
+            </span>
+            <button
+              className="day-nav-btn"
+              onClick={() => setViewOffset(viewOffset + 1)}
+            >
+              내일 →
+            </button>
           </div>
 
-          <div className="read-footer">
-            {completedToday ? (
-              <div className="read-done">
-                <button className="complete-btn done" disabled>
-                  오늘 읽기 완료 ✓
+          {verses.length === 0 ? (
+            <div className="empty-state">
+              <p className="empty-text">
+                {viewOffset > 0
+                  ? '이 날의 분량이 아직 없어요.\n계획한 구간을 다 읽으면 새 계획을 정할 수 있어요.'
+                  : '이 날의 분량이 없어요.'}
+              </p>
+              {viewOffset !== 0 && (
+                <button className="empty-btn" onClick={() => setViewOffset(0)}>
+                  오늘로 돌아가기
                 </button>
-                <p className="encourage">오늘도 말씀과 함께하셨네요.</p>
+              )}
+            </div>
+          ) : (
+            <>
+              <div className="ref">{refLabel}</div>
+
+              <div className="verse-grid">
+                <div className="verse-col">
+                  <div className="verse-tag">개역한글</div>
+                  <div className="passage-ko">
+                    {verses.map((v) => (
+                      <div key={`ko-${v.book_order}-${v.chapter}-${v.verse}`} className="verse-line-ko">
+                        <span className="vnum">{v.verse}</span>
+                        {v.text_ko}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="divider"></div>
+                <div className="verse-col">
+                  <div className="verse-tag">KJV</div>
+                  <div className="passage-en">
+                    {verses.map((v) => (
+                      <div key={`en-${v.book_order}-${v.chapter}-${v.verse}`} className="verse-line-en">
+                        <span className="vnum">{v.verse}</span>
+                        {v.text_en}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-            ) : (
-              <>
-                <p className="today-amount">오늘 읽을 분량 · {verses.length}절</p>
-                <button
-                  className="complete-btn"
-                  onClick={handleComplete}
-                  disabled={saving}
-                >
-                  {saving ? '저장 중...' : '오늘 읽기 완료'}
-                </button>
-              </>
-            )}
-          </div>
+
+              {/* 완료 영역은 '오늘'을 볼 때만 */}
+              {viewOffset === 0 ? (
+                <div className="read-footer">
+                  {completedToday ? (
+                    <div className="read-done">
+                      <button className="complete-btn done" disabled>
+                        오늘 읽기 완료 ✓
+                      </button>
+                      <p className="encourage">오늘도 말씀과 함께하셨네요.</p>
+                    </div>
+                  ) : (
+                    <>
+                      <p className="today-amount">오늘 읽을 분량 · {verses.length}절</p>
+                      <button
+                        className="complete-btn"
+                        onClick={handleComplete}
+                        disabled={saving}
+                      >
+                        {saving ? '저장 중...' : '오늘 읽기 완료'}
+                      </button>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <div className="read-footer">
+                  <button className="complete-btn done" onClick={() => setViewOffset(0)}>
+                    오늘로 돌아가기
+                  </button>
+                </div>
+              )}
+            </>
+          )}
         </>
       )}
 
