@@ -158,9 +158,6 @@ body {
   margin-bottom: 32px;
   padding-top: 28px;
   border-top: 1px solid var(--divider);
-  max-width: 200px;
-  margin-left: auto;
-  margin-right: auto;
 }
 [data-theme="light"] .ref {
   font-family: 'Noto Sans KR', sans-serif;
