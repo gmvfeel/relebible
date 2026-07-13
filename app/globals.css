@@ -96,11 +96,20 @@ body {
 
 /* ===== 날짜 헤더 ===== */
 .date-header { text-align: center; margin-bottom: 40px; }
-[data-theme="light"] .date-header {
-  text-align: left;
+.date-line {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.date-sep { color: var(--text-faint); }
+.day-count-guide {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  color: var(--text-sub);
+}
+[data-theme="light"] .date-header {
   border-bottom: 2px solid var(--divider);
   padding-bottom: 20px;
 }
@@ -109,7 +118,6 @@ body {
   font-size: 14px;
   letter-spacing: 1px;
   color: var(--text-sub);
-  margin-bottom: 6px;
 }
 [data-theme="light"] .date {
   font-family: 'Noto Sans KR', sans-serif;
@@ -122,7 +130,7 @@ body {
 }
 .day-count {
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text-sub);
   letter-spacing: 0;
@@ -148,6 +156,11 @@ body {
   font-weight: 800;
   text-align: center;
   margin-bottom: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--divider);
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 [data-theme="light"] .ref {
   font-family: 'Noto Sans KR', sans-serif;
@@ -600,7 +613,7 @@ body {
   font-family: 'Nanum Myeongjo', serif;
   font-weight: 700;
   font-size: 30px;
-  line-height: 1.95;
+  line-height: 1.6;
   letter-spacing: -0.03em;
   text-align: left;
   max-width: 640px;
@@ -611,13 +624,13 @@ body {
   font-family: 'Lora', serif;
   font-style: italic;
   font-size: 19px;
-  line-height: 1.85;
+  line-height: 1.55;
   color: var(--text-sub);
   text-align: left;
   max-width: 640px;
   margin: 0 auto;
 }
-.verse-line-ko, .verse-line-en { display: block; margin-bottom: 14px; }
+.verse-line-ko, .verse-line-en { display: block; margin-bottom: 20px; }
 .verse-line-ko:last-child, .verse-line-en:last-child { margin-bottom: 0; }
 .vnum {
   display: inline-block;
@@ -632,8 +645,8 @@ body {
 .passage-en .vnum { font-family: 'Inter', sans-serif; }
 
 @media (max-width: 560px) {
-  .passage-ko { font-size: 24px; line-height: 1.8; }
-  .passage-en { font-size: 17px; line-height: 1.7; }
+  .passage-ko { font-size: 24px; line-height: 1.55; }
+  .passage-en { font-size: 17px; line-height: 1.5; }
 }
 
 /* ===== 빈 상태 (계획 없음 등) 안내 ===== */

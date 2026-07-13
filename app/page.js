@@ -226,14 +226,18 @@ export default function Home() {
       </div>
 
       <div className="date-header">
-        <div>
-          <div className="date">{todayDate}</div>
-        </div>
-        <div className="day-count">
-          {user ? (
-            <>성경읽기 <span className="day-num">{totalDays}</span>일째</>
-          ) : (
-            '로그인하면 진도가 기록돼요'
+        <div className="date-line">
+          <span className="date">{todayDate}</span>
+          {user && (
+            <>
+              <span className="date-sep">·</span>
+              <span className="day-count">
+                성경읽기 <span className="day-num">{totalDays}</span>일째
+              </span>
+            </>
+          )}
+          {!user && (
+            <span className="day-count-guide">로그인하면 진도가 기록돼요</span>
           )}
         </div>
       </div>
