@@ -178,8 +178,9 @@ body {
 .kr {
   font-family: 'Nanum Myeongjo', serif;
   font-weight: 700;
-  font-size: 30px;
-  line-height: 2.1;
+  font-size: 38px;
+  line-height: 1.9;
+  letter-spacing: -0.03em;
   text-align: center;
   max-width: 620px;
   margin: 0 auto 32px;
@@ -203,9 +204,9 @@ body {
 
 .en {
   font-family: 'Lora', serif;
-  font-size: 21px;
+  font-size: 23px;
   font-style: italic;
-  line-height: 2;
+  line-height: 1.9;
   color: var(--text-sub);
   text-align: center;
   max-width: 560px;
