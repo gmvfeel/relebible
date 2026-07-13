@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '../lib/supabaseClient';
+import InstallBanner from './InstallBanner';
 
 export default function Home() {
   const [theme, setTheme] = useState('dark');
@@ -214,6 +215,8 @@ export default function Home() {
         </button>
         <button className="nav-btn">내일 →</button>
       </div>
+
+      <InstallBanner />
     </div>
   );
 }
