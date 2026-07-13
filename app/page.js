@@ -201,7 +201,6 @@ export default function Home() {
 
   return (
     <div className="container">
-      <div className="sticky-header">
       <div className="topbar">
         <span className="logo">R<span className="sun-e">e</span>leBible</span>
         <div className="topbar-right">
@@ -264,8 +263,6 @@ export default function Home() {
           )}
         </div>
       </div>
-      </div>
-      {/* ↑ 여기까지 상단 고정 영역 */}
 
       {/* 상태에 따라 다르게 표시 */}
       {loading ? (
