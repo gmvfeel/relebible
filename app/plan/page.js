@@ -148,7 +148,8 @@ export default function PlanPage() {
     <div className="container">
       <div className="topbar">
         <span className="logo" onClick={() => router.push('/')} style={{ cursor: 'pointer' }}>
-          R<span className="sun-e">e</span>leBible
+          <span className="logo-mark">RELEBIBLE</span>
+          <span className="logo-ko">리리바이블</span>
         </span>
       </div>
 
