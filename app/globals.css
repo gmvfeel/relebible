@@ -142,10 +142,10 @@ body {
 
 /* ===== 본문 영역 ===== */
 .ref {
-  font-family: 'Gowun Dodum', sans-serif;
+  font-family: 'Nanum Myeongjo', serif;
   font-size: 26px;
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 800;
   text-align: center;
   margin-bottom: 32px;
 }
@@ -176,14 +176,14 @@ body {
 [data-theme="light"] .verse-tag { display: block; }
 
 .kr {
-  font-family: 'Gowun Dodum', sans-serif;
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 700;
   font-size: 30px;
   line-height: 2.1;
   text-align: center;
   max-width: 620px;
   margin: 0 auto 32px;
   word-break: keep-all;
-  transform: skewX(-9deg);
 }
 [data-theme="light"] .kr {
   font-family: 'Noto Serif KR', serif;
@@ -505,7 +505,8 @@ body {
   padding: 0 4px;
 }
 .plan-title {
-  font-family: 'Gowun Dodum', sans-serif;
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 800;
   font-size: 26px;
   color: var(--accent);
   text-align: center;
