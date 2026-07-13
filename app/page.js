@@ -20,11 +20,12 @@ export default function Home() {
   const router = useRouter();
   const supabase = createClient();
 
+  // 한국 시간(KST) 기준 오늘 날짜 (YYYY-MM-DD)
   const getTodayString = () => {
-    const now = new Date();
-    const y = now.getFullYear();
-    const m = String(now.getMonth() + 1).padStart(2, '0');
-    const d = String(now.getDate()).padStart(2, '0');
+    const kst = new Date(Date.now() + 9 * 60 * 60 * 1000);
+    const y = kst.getUTCFullYear();
+    const m = String(kst.getUTCMonth() + 1).padStart(2, '0');
+    const d = String(kst.getUTCDate()).padStart(2, '0');
     return `${y}-${m}-${d}`;
   };
 
@@ -33,9 +34,11 @@ export default function Home() {
   }, [theme]);
 
   useEffect(() => {
-    const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-    const now = new Date();
-    setTodayDate(months[now.getMonth()] + ' ' + now.getDate());
+    // 한국 시간(KST) 기준으로 '7월 13일' 형태
+    const kst = new Date(Date.now() + 9 * 60 * 60 * 1000);
+    const month = kst.getUTCMonth() + 1;
+    const day = kst.getUTCDate();
+    setTodayDate(`${month}월 ${day}일`);
   }, []);
 
   // 오늘의 본문 불러오기 (지금은 창세기 1장 1절로 연결 확인)
@@ -164,7 +167,7 @@ export default function Home() {
         </div>
         <div className="day-count">
           {user ? (
-            <>통독 <span className="day-num">{totalDays}</span>일째</>
+            <>성경읽기 <span className="day-num">{totalDays}</span>일째</>
           ) : (
             '로그인하면 진도가 기록돼요'
           )}
