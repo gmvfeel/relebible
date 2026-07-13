@@ -182,7 +182,7 @@ body {
   max-width: 620px;
   margin: 0 auto 32px;
   word-break: keep-all;
-  transform: skewX(-13deg);
+  transform: skewX(-9deg);
 }
 [data-theme="light"] .kr {
   font-family: 'Noto Serif KR', serif;
