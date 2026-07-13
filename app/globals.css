@@ -629,7 +629,7 @@ body {
 .passage-ko {
   font-family: 'Nanum Myeongjo', serif;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 22px;
   line-height: 1.6;
   letter-spacing: -0.03em;
   text-align: left;
@@ -640,7 +640,7 @@ body {
 .passage-en {
   font-family: 'Lora', serif;
   font-style: italic;
-  font-size: 19px;
+  font-size: 17px;
   line-height: 1.55;
   color: var(--text-sub);
   text-align: left;
@@ -662,8 +662,8 @@ body {
 .passage-en .vnum { font-family: 'Inter', sans-serif; }
 
 @media (max-width: 560px) {
-  .passage-ko { font-size: 24px; line-height: 1.55; }
-  .passage-en { font-size: 17px; line-height: 1.5; }
+  .passage-ko { font-size: 20px; line-height: 1.55; }
+  .passage-en { font-size: 15px; line-height: 1.5; }
 }
 
 /* ===== 빈 상태 (계획 없음 등) 안내 ===== */
