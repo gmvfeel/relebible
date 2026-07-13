@@ -530,6 +530,15 @@ body {
   color: var(--text-main);
   width: 100%;
 }
+/* 풀다운을 열었을 때 나오는 항목들 (배경 어둡게 / 글씨 밝게) */
+.plan-select option {
+  background: #2c3e50;
+  color: #e8eef5;
+}
+[data-theme="light"] .plan-select option {
+  background: #ffffff;
+  color: #1a1a2e;
+}
 .plan-select:disabled { opacity: 0.5; }
 .plan-perday { display: flex; align-items: center; gap: 10px; }
 .plan-number { width: 100px; text-align: center; }
