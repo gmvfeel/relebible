@@ -550,6 +550,10 @@ body {
 }
 .note-field {
   width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  display: block;
+  box-sizing: border-box;
   font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.7;
