@@ -526,3 +526,68 @@ body {
   text-align: center;
   padding: 40px;
 }
+
+/* ===== 오늘의 기록 (묵상·기도 노트) ===== */
+.note-box {
+  max-width: 680px;
+  margin: 44px auto 0;
+  padding-top: 32px;
+  border-top: 1px solid var(--divider);
+}
+.note-head { text-align: center; margin-bottom: 18px; }
+.note-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 800;
+  font-size: 19px;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.note-desc {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-faint);
+}
+.note-field {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-main);
+  background: var(--soft-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 16px;
+  outline: none;
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color var(--transition);
+}
+.note-field:focus { border-color: var(--accent); }
+.note-field::placeholder { color: var(--text-faint); }
+.note-foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 12px;
+}
+.note-saved {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--accent);
+}
+.note-save-btn {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bg-solid);
+  background: var(--accent);
+  border: none;
+  border-radius: 100px;
+  padding: 11px 26px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.note-save-btn:hover:not(:disabled) { opacity: 0.9; }
+.note-save-btn:disabled { opacity: 0.4; cursor: default; }

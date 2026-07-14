@@ -21,12 +21,28 @@ export default function Home() {
   const [viewOffset, setViewOffset] = useState(0); // 오늘=0, 어제=-1, 내일=+1
   const [loading, setLoading] = useState(true);
 
+  // 오늘의 기록(묵상·기도 노트)
+  const [note, setNote] = useState('');            // 입력창 내용
+  const [savedNote, setSavedNote] = useState('');  // 저장된 내용
+  const [noteSaving, setNoteSaving] = useState(false);
+  const [noteSavedMsg, setNoteSavedMsg] = useState(false);
+
   const router = useRouter();
   const supabase = createClient();
 
   // 한국 시간(KST) 기준 오늘 날짜 (YYYY-MM-DD)
   const getTodayString = () => {
     const kst = new Date(Date.now() + 9 * 60 * 60 * 1000);
+    const y = kst.getUTCFullYear();
+    const m = String(kst.getUTCMonth() + 1).padStart(2, '0');
+    const d = String(kst.getUTCDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+  };
+
+  // 보고 있는 날짜(오늘 + viewOffset) YYYY-MM-DD
+  const getViewDateString = () => {
+    const kst = new Date(Date.now() + 9 * 60 * 60 * 1000);
+    kst.setUTCDate(kst.getUTCDate() + viewOffset);
     const y = kst.getUTCFullYear();
     const m = String(kst.getUTCMonth() + 1).padStart(2, '0');
     const d = String(kst.getUTCDate()).padStart(2, '0');
@@ -103,6 +119,7 @@ export default function Home() {
     if (activePlan) {
       await loadTodayVerses(activePlan, viewOffset);
     }
+    await loadNote();
     setLoading(false);
   };
 
@@ -111,7 +128,52 @@ export default function Home() {
     if (plan) {
       loadTodayVerses(plan, viewOffset);
     }
+    if (user) {
+      loadNote();
+    }
   }, [viewOffset]);
+
+  // 보고 있는 날짜의 기록 불러오기
+  const loadNote = async () => {
+    setNoteSavedMsg(false);
+    const { data } = await supabase
+      .from('rb_reading_notes')
+      .select('content')
+      .eq('user_id', user.id)
+      .eq('note_date', getViewDateString())
+      .maybeSingle();
+    const saved = data?.content ?? '';
+    setNote(saved);
+    setSavedNote(saved);
+  };
+
+  // 기록 저장 (있으면 수정, 없으면 새로)
+  const handleSaveNote = async () => {
+    if (!user || note.trim() === '') return;
+    setNoteSaving(true);
+
+    const { error } = await supabase
+      .from('rb_reading_notes')
+      .upsert(
+        {
+          user_id: user.id,
+          note_date: getViewDateString(),
+          reference: refLabel,
+          content: note.trim(),
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: 'user_id,note_date' }
+      );
+
+    setNoteSaving(false);
+    if (!error) {
+      setSavedNote(note.trim());
+      setNoteSavedMsg(true);
+      setTimeout(() => setNoteSavedMsg(false), 2500);
+    } else {
+      alert('기록 저장 중 문제가 생겼어요. 잠시 후 다시 시도해 주세요.');
+    }
+  };
 
   // 계획을 바탕으로 (보고 있는 날의) 읽을 절들 계산해서 가져오기
   const loadTodayVerses = async (activePlan, offset = 0) => {
@@ -315,6 +377,33 @@ export default function Home() {
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* 오늘의 기록 (묵상·기도 노트) */}
+          <div className="note-box">
+            <div className="note-head">
+              <span className="note-title">
+                {viewOffset === 0 ? '오늘의 기록' : '이 날의 기록'}
+              </span>
+              <span className="note-desc">말씀을 읽고 떠오른 묵상이나 기도를 남겨보세요</span>
+            </div>
+            <textarea
+              className="note-field"
+              placeholder="오늘 마음에 와닿은 말씀, 기도 제목을 자유롭게 적어보세요."
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              rows={5}
+            />
+            <div className="note-foot">
+              {noteSavedMsg && <span className="note-saved">저장되었어요 ✓</span>}
+              <button
+                className="note-save-btn"
+                onClick={handleSaveNote}
+                disabled={noteSaving || note.trim() === '' || note.trim() === savedNote}
+              >
+                {noteSaving ? '저장 중...' : savedNote ? '기록 수정' : '기록 저장'}
+              </button>
             </div>
           </div>
 
