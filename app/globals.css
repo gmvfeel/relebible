@@ -529,7 +529,7 @@ body {
 
 /* ===== 오늘의 기록 (묵상·기도 노트) ===== */
 .note-box {
-  max-width: 680px;
+  max-width: 820px;
   margin: 44px auto 0;
   padding-top: 32px;
   border-top: 1px solid var(--divider);
