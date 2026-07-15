@@ -120,18 +120,16 @@ body {
 }
 .top-icon-btn:hover { color: var(--accent); border-color: var(--accent); }
 
-/* ===== 진도/날짜 메타 영역 (카드형) ===== */
+/* ===== 진도/날짜 메타 영역 (상단 구분선) ===== */
 .meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   width: 100%;
-  margin: 28px 0 18px;
-  padding: 16px 22px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 14px;
+  margin: 8px 0 20px;
+  padding: 22px 0 0;
+  border-top: 1px solid var(--divider);
 }
 .meta-date {
   font-family: var(--font-sans);
@@ -345,7 +343,7 @@ body {
   .container { padding: 20px 16px 50px; }
   .verse-cols { grid-template-columns: 1fr; gap: 32px; }
   .meta-streak { font-size: 20px; }
-  .meta { padding: 14px 16px; }
+  .meta { padding: 18px 0 0; }
   .reading-card, .note-box { padding: 20px 18px; }
   .passage-ko { font-size: 19px; }
   .passage-en { font-size: 16px; }
