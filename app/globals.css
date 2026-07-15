@@ -435,7 +435,8 @@ body {
 /* ===== PWA 설치 배너 (상단 배치) ===== */
 .install-banner {
   width: 100%;
-  margin: 0 0 16px;
+  max-width: 420px;
+  margin: 0 auto 16px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 14px;
