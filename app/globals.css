@@ -10,6 +10,7 @@
 
 /* ===== 다크 모드 (Sanctuary) ===== */
 [data-theme="dark"] {
+  color-scheme: dark;
   --bg: #14171f;
   --bg-solid: #14171f;
   --text-main: #e9ecf2;
@@ -25,6 +26,7 @@
 
 /* ===== 라이트 모드 (Sanctuary) ===== */
 [data-theme="light"] {
+  color-scheme: light;
   --bg: #faf9f6;
   --bg-solid: #faf9f6;
   --text-main: #1a1a1a;
@@ -384,10 +386,22 @@ body {
 }
 .auth-field {
   width: 100%;
+  margin-bottom: 14px;
+}
+.auth-field label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-sub);
+  margin-bottom: 6px;
+}
+.auth-field input {
+  width: 100%;
+  box-sizing: border-box;
   font-family: var(--font-sans);
   font-size: 15px;
   padding: 13px 15px;
-  margin-bottom: 12px;
   border-radius: 10px;
   border: 1px solid var(--card-border);
   background: var(--soft-bg);
@@ -395,8 +409,16 @@ body {
   outline: none;
   transition: border-color var(--transition);
 }
-.auth-field:focus { border-color: var(--accent); }
-.auth-field::placeholder { color: var(--text-faint); }
+.auth-field input:focus { border-color: var(--accent); }
+.auth-field input::placeholder { color: var(--text-faint); }
+.auth-field input:-webkit-autofill,
+.auth-field input:-webkit-autofill:hover,
+.auth-field input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-main);
+  -webkit-box-shadow: 0 0 0 1000px var(--soft-bg) inset;
+  caret-color: var(--text-main);
+  transition: background-color 9999s ease-in-out 0s;
+}
 .auth-submit {
   width: 100%;
   font-family: var(--font-sans);
@@ -516,6 +538,10 @@ body {
   transition: border-color var(--transition);
 }
 .plan-select:focus, .plan-number:focus { border-color: var(--accent); }
+.plan-select option {
+  background: var(--bg);
+  color: var(--text-main);
+}
 .plan-perday { display: flex; align-items: center; gap: 10px; }
 .plan-perday .plan-number { max-width: 120px; }
 .plan-unit { font-family: var(--font-sans); font-size: 14px; color: var(--text-sub); }
