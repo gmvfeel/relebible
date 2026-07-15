@@ -42,6 +42,8 @@
   --soft-bg: rgba(0,0,0,0.04);
 }
 
+html { overflow-x: hidden; }
+
 body {
   background: var(--bg);
   color: var(--text-main);
@@ -137,8 +139,9 @@ body {
   content: '';
   position: absolute;
   top: 0;
-  left: -24px;
-  right: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
   border-top: 1px solid var(--card-border);
 }
 .meta-date {
@@ -168,7 +171,7 @@ body {
   width: 100%;
   margin: 0 0 18px;
   background: var(--card-bg);
-  border: 1px solid var(--card-border);
+  border: 1px solid var(--accent);
   border-radius: 16px;
   padding: 26px 28px;
 }
@@ -354,7 +357,6 @@ body {
   .verse-cols { grid-template-columns: 1fr; gap: 32px; }
   .meta-streak { font-size: 20px; }
   .meta { margin-top: 26px; padding: 22px 0 0; }
-  .meta::before { left: -16px; right: -16px; }
   .reading-card, .note-box { padding: 20px 18px; }
   .passage-ko { font-size: 19px; }
   .passage-en { font-size: 16px; }
