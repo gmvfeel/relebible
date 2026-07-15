@@ -20,6 +20,7 @@ export default function Home() {
   const [dayNumber, setDayNumber] = useState(0);   // 보고 있는 날이 며칠째인지
   const [viewOffset, setViewOffset] = useState(0); // 오늘=0, 어제=-1, 내일=+1
   const [loading, setLoading] = useState(true);
+  const [fontSize, setFontSize] = useState('normal'); // 본문 글자 크기: small/normal/large
 
   // 오늘의 기록(묵상·기도 노트)
   const [note, setNote] = useState('');            // 입력창 내용
@@ -56,6 +57,14 @@ export default function Home() {
   useEffect(() => {
     const kst = new Date(Date.now() + 9 * 60 * 60 * 1000);
     setTodayDate(`${kst.getUTCFullYear()}년 ${kst.getUTCMonth() + 1}월 ${kst.getUTCDate()}일`);
+  }, []);
+
+  // 저장해 둔 글자 크기 불러오기
+  useEffect(() => {
+    const saved = localStorage.getItem('rb_font_size');
+    if (saved === 'small' || saved === 'normal' || saved === 'large') {
+      setFontSize(saved);
+    }
   }, []);
 
   // 로그인 상태 확인
@@ -212,6 +221,12 @@ export default function Home() {
 
   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
 
+  // 본문 글자 크기 변경 (선택값 저장)
+  const changeFontSize = (size) => {
+    setFontSize(size);
+    localStorage.setItem('rb_font_size', size);
+  };
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setUser(null);
@@ -357,10 +372,29 @@ export default function Home() {
         <>
           <div className="reading-card">
             <div className="reading-cardhead">
-              <span className="ref-inline">{refLabel}</span>
-              <span className="amount-inline">오늘 분량 · {verses.length}절</span>
+              <div className="cardhead-left">
+                <span className="ref-inline">{refLabel}</span>
+                <span className="amount-inline">오늘 분량 · {verses.length}절</span>
+              </div>
+              <div className="fontsize-ctrl" role="group" aria-label="글자 크기 조절">
+                <button
+                  className={fontSize === 'small' ? 'fs-btn fs-s active' : 'fs-btn fs-s'}
+                  onClick={() => changeFontSize('small')}
+                  aria-label="작게"
+                >가</button>
+                <button
+                  className={fontSize === 'normal' ? 'fs-btn fs-m active' : 'fs-btn fs-m'}
+                  onClick={() => changeFontSize('normal')}
+                  aria-label="보통"
+                >가</button>
+                <button
+                  className={fontSize === 'large' ? 'fs-btn fs-l active' : 'fs-btn fs-l'}
+                  onClick={() => changeFontSize('large')}
+                  aria-label="크게"
+                >가</button>
+              </div>
             </div>
-            <div className="reading">
+            <div className="reading" data-size={fontSize}>
               <div className="verse-cols">
                 <div className="verse-col">
                   <div className="verse-col-tag">개역한글</div>
