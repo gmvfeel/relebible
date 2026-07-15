@@ -125,8 +125,7 @@ body {
   justify-content: space-between;
   gap: 16px;
   width: 100%;
-  max-width: 860px;
-  margin: 28px auto 18px;
+  margin: 28px 0 18px;
   padding: 16px 22px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -157,8 +156,7 @@ body {
 /* ===== 본문 카드 (카드형) ===== */
 .reading-card {
   width: 100%;
-  max-width: 860px;
-  margin: 0 auto 18px;
+  margin: 0 0 18px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 16px;
@@ -207,8 +205,6 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 44px;
-  max-width: 860px;
-  margin: 0 auto;
   width: 100%;
 }
 .verse-col-tag {
@@ -436,14 +432,10 @@ body {
 }
 .auth-back:hover { color: var(--accent); }
 
-/* ===== PWA 설치 배너 ===== */
+/* ===== PWA 설치 배너 (상단 배치) ===== */
 .install-banner {
-  position: fixed;
-  left: 50%;
-  bottom: 20px;
-  transform: translateX(-50%);
-  width: calc(100% - 40px);
-  max-width: 420px;
+  width: 100%;
+  margin: 0 0 16px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 14px;
@@ -451,9 +443,6 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-  z-index: 100;
 }
 .install-icon { width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0; }
 .install-text { flex: 1; font-family: var(--font-sans); font-size: 13px; line-height: 1.5; color: var(--text-main); }
@@ -572,8 +561,7 @@ body {
 /* ===== 오늘의 기록 (묵상·기도 노트) ===== */
 .note-box {
   width: 100%;
-  max-width: 860px;
-  margin: 0 auto 18px;
+  margin: 0 0 18px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 16px;

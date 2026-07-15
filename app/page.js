@@ -263,6 +263,8 @@ export default function Home() {
 
   return (
     <div className="container">
+      <InstallBanner />
+
       {/* 상단 바 */}
       <div className="topbar">
         <span className="logo">
@@ -436,8 +438,6 @@ export default function Home() {
           </div>
         </>
       )}
-
-      <InstallBanner />
     </div>
   );
 }
