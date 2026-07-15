@@ -17,6 +17,7 @@
   --text-sub: #c5cbd6;
   --text-faint: #8791a0;
   --accent: #f0d9a8;
+  --accent-border: rgba(240, 217, 168, 0.4);
   --accent-strong: #f0d9a8;
   --card-bg: rgba(255,255,255,0.04);
   --card-bg-deep: rgba(0,0,0,0.22);
@@ -34,6 +35,7 @@
   --text-sub: #55555c;
   --text-faint: #999992;
   --accent: #c99a3f;
+  --accent-border: rgba(201, 154, 63, 0.4);
   --accent-strong: #1a1a1a;
   --card-bg: #ffffff;
   --card-bg-deep: rgba(0,0,0,0.05);
@@ -171,7 +173,7 @@ body {
   width: 100%;
   margin: 0 0 18px;
   background: var(--card-bg);
-  border: 1px solid var(--accent);
+  border: 1px solid var(--accent-border);
   border-radius: 16px;
   padding: 26px 28px;
 }
@@ -646,7 +648,7 @@ body {
   width: 100%;
   margin: 0 0 18px;
   background: var(--card-bg-deep);
-  border: 1px solid var(--card-border);
+  border: 1px solid var(--accent-border);
   border-radius: 16px;
   padding: 26px 28px;
 }
