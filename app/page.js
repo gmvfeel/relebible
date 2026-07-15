@@ -353,28 +353,32 @@ export default function Home() {
         </div>
       ) : (
         <>
-          <div className="ref">{refLabel}</div>
-
-          <div className="reading">
-            <div className="verse-cols">
-              <div className="verse-col">
-                <div className="verse-col-tag">개역한글</div>
-                <div className="passage-ko">
-                  {verses.map((v) => (
-                    <span key={`ko-${v.book_order}-${v.chapter}-${v.verse}`} className="v">
-                      <span className="vn">{v.verse}</span>{v.text_ko}
-                    </span>
-                  ))}
+          <div className="reading-card">
+            <div className="reading-cardhead">
+              <span className="ref-inline">{refLabel}</span>
+              <span className="amount-inline">오늘 분량 · {verses.length}절</span>
+            </div>
+            <div className="reading">
+              <div className="verse-cols">
+                <div className="verse-col">
+                  <div className="verse-col-tag">개역한글</div>
+                  <div className="passage-ko">
+                    {verses.map((v) => (
+                      <span key={`ko-${v.book_order}-${v.chapter}-${v.verse}`} className="v">
+                        <span className="vn">{v.verse}</span>{v.text_ko}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="verse-col">
-                <div className="verse-col-tag">KJV</div>
-                <div className="passage-en">
-                  {verses.map((v) => (
-                    <span key={`en-${v.book_order}-${v.chapter}-${v.verse}`} className="v">
-                      <span className="vn">{v.verse}</span>{v.text_en}
-                    </span>
-                  ))}
+                <div className="verse-col">
+                  <div className="verse-col-tag">KJV</div>
+                  <div className="passage-en">
+                    {verses.map((v) => (
+                      <span key={`en-${v.book_order}-${v.chapter}-${v.verse}`} className="v">
+                        <span className="vn">{v.verse}</span>{v.text_en}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -416,12 +420,9 @@ export default function Home() {
                   <p className="encourage">오늘도 말씀과 함께하셨네요.</p>
                 </div>
               ) : (
-                <>
-                  <p className="today-amount">오늘 읽을 분량 · {verses.length}절</p>
-                  <button className="cta" onClick={handleComplete} disabled={saving}>
-                    {saving ? '저장 중...' : '오늘 읽기 완료'}
-                  </button>
-                </>
+                <button className="cta" onClick={handleComplete} disabled={saving}>
+                  {saving ? '저장 중...' : '오늘 읽기 완료'}
+                </button>
               )
             ) : (
               <button className="cta done" onClick={() => setViewOffset(0)}>오늘로 돌아가기</button>
